@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor</title>
+    <style>
+        
+        .editor{
+            border: 2px solid black;
+            display: flex;
+            flex-wrap: wrap; 
+            max-height: 800px;
+            overflow: hidden;
+        }
+        .editor-window{
+            margin: 5px;
+            padding :10px;
+            
+        }
+        #output{
+            margin:5px;
+            width:99%;
+            min-height:500px;
+            resize: both;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Live Code Editor</h1>
+    </header>                                   
+
+    <div class="editor">
+        <textarea class ="editor-window" name="html-code" id="html-code" cols="30" rows="10" placeholder="HTML"></textarea>
+        <textarea class ="editor-window" name="css-code" id="css-code" cols="30" rows="10" placeholder="CSS"></textarea>
+        <textarea class ="editor-window" name="js-code" id="js-code" cols="30" rows="10" placeholder="JavaScript"></textarea>
+        <iframe src="result" id="output" frameborder="1"></iframe>
+    </div>
+
+    <script type="text/javascript">
+        function run(){
+            let htmlcode = document.querySelector(".editor #html-code").value;
+            let csscode = document.querySelector(".editor #css-code").value;
+            let jscode = document.querySelector(".editor #js-code").value;
+            let output = document.querySelector(".editor #output");
+            output.contentDocument.body.innerHTML = htmlcode + "<style>" + csscode + "</style>";
+            output.contentDocument.eval(jscode);
+        }
+        document.querySelector(".editor #html-code").addEventListener("keyup",run);
+        document.querySelector(".editor #css-code").addEventListener("keyup",run);
+        document.querySelector(".editor #js-code").addEventListener("keyup",run);
+    </script>
+</body>
+</html>
